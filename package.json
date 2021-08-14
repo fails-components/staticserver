@@ -1,0 +1,19 @@
+{
+  "name": "@fails-components/staticserver",
+  "version": "0.0.0",
+  "description": "fails static webpages served through nginx",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fails-components/security.git"
+  },
+  "author": "Marten Richter <marten.richter@freenet.de>",
+  "license": "AGPL-3.0-or-later",
+  "homepage": "https://github.com/fails-components/security#readme",
+  "dependencies": {
+    "@fails-components/app": ">=0.0.1",
+    "@fails-components/lectureapp": ">=0.0.2"
+  }
+}
