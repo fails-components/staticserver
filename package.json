@@ -13,7 +13,7 @@
   "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/fails-components/security#readme",
   "dependencies": {
-    "@fails-components/app": ">=0.0.1",
+    "@fails-components/app": ">=0.0.2",
     "@fails-components/lectureapp": ">=0.0.2"
   }
 }
