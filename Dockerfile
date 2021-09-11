@@ -15,10 +15,14 @@ RUN npm run build
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
 RUN npm run build
 
+WORKDIR /usr/src/staticserver
+RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-attribution
+
 FROM nginx:1.21
 COPY ./nginx.conf /etc/nginx/templates/default.conf.template
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/app/build/ /usr/share/nginx/html/static/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureapp/build/ /usr/share/nginx/html/static/lecture
+COPY --from=build-stage /usr/src/staticserver/oss-attribution/ /usr/share/nginx/html/static/oss/
 
 VOLUME ["/usr/share/nginx/htmlsecuredfiles"]
 

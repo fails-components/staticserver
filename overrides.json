@@ -1,0 +1,29 @@
+{
+  "@fails-components/app": {
+    "ignore": true
+  },
+  "@fails-components/apphandler": {
+    "ignore": true
+  },
+  "@fails-components/config": {
+    "ignore": true
+  },
+  "@fails-components/data": {
+    "ignore": true
+  },
+  "@fails-components/housekeeping": {
+    "ignore": true
+  },
+  "@fails-components/lectureapp": {
+    "ignore": true
+  },
+  "@fails-components/ltihandler": {
+    "ignore": true
+  },
+  "@fails-components/notepadhandler": {
+    "ignore": true
+  },
+  "@fails-components/security": {
+    "ignore": true
+  }
+}
