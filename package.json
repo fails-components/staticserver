@@ -1,6 +1,6 @@
 {
   "name": "@fails-components/staticserver",
-  "version": "0.0.15",
+  "version": "0.0.16",
   "description": "fails static webpages served through nginx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +16,7 @@
     "@fails-components/app": "=0.0.9",
     "@fails-components/apphandler": "github:fails-components/apphandler",
     "@fails-components/housekeeping": "github:fails-components/housekeeping",
-    "@fails-components/lectureapp": "=0.0.14",
+    "@fails-components/lectureapp": "=0.0.15",
     "@fails-components/ltihandler": "github:fails-components/ltihandler",
     "@fails-components/notepadhandler": "github:fails-components/notepadhandler",
     "@fails-components/noteshandler": "github:fails-components/noteshandler",
