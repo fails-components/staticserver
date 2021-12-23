@@ -1,0 +1,37 @@
+name: Delete old container images
+
+on:
+  schedule:
+    - cron: '0 0 * * *'  # every day at midnight
+  workflow_dispatch:
+    inputs:
+      logLevel:
+        description: 'Log level'     
+        required: true
+        default: 'warning'
+      tags:
+        description: 'Testing the container deletion mechanism'
+
+jobs:
+  purge-image:
+    name: Delete image from ghcr.io
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Get repository name
+        run: echo "REPOSITORY_NAME=$(echo '${{ github.repository }}' | awk -F '/' '{print $2}')" >> $GITHUB_ENV
+        shell: bash
+      - name: Delete image release candiate
+        uses: r26d/ghcr-delete-image-action@v1.1.0
+        with:
+          owner: ${{ github.repository_owner }}
+          name: ${{ env.REPOSITORY_NAME }}
+          token: ${{ secrets.GH_DELETE_PACKAGE }}
+          tagged-keep-latest: 5
+          untagged-keep-latest: 5
+          tag-regex: \d\.\d.\d-rc\d
+
+
+ 
