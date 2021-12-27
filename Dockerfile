@@ -1,4 +1,4 @@
-FROM node:14-bullseye as build-stage
+FROM node:16-bullseye as build-stage
 
 ARG ENV
 
@@ -10,10 +10,10 @@ COPY .npmrc ./
 RUN --mount=type=secret,id=GH_TOKEN export GH_TOKEN=`cat /run/secrets/GH_TOKEN`; npm ci --only=production 
 #build the app
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/app
-RUN npm run build
+RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
 #build the lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
-RUN npm run build
+RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
 
 WORKDIR /usr/src/staticserver
 RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-attribution
