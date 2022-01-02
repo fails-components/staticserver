@@ -1,5 +1,6 @@
 !["FAILS logo"](failslogo.svg)
 # Fancy automated internet lecture system (**FAILS**) - components
+[![Publish container](https://github.com/fails-components/staticserver/actions/workflows/docker-build.yml/badge.svg)](https://github.com/fails-components/staticserver/actions/workflows/docker-build.yml)
 
 This package is part of FAILS.
 A web based system developed out of university lectures.
