@@ -13,10 +13,10 @@
   "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
-    "@fails-components/app": "^1.0.0-rc.7",
+    "@fails-components/app": "^1.0.0-rc.8",
     "@fails-components/apphandler": "github:fails-components/apphandler",
     "@fails-components/housekeeping": "github:fails-components/housekeeping",
-    "@fails-components/lectureapp": "^1.0.0-rc.4",
+    "@fails-components/lectureapp": "^1.0.0-rc.5",
     "@fails-components/ltihandler": "github:fails-components/ltihandler",
     "@fails-components/notepadhandler": "github:fails-components/notepadhandler",
     "@fails-components/noteshandler": "github:fails-components/noteshandler",
