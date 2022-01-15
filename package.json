@@ -13,13 +13,13 @@
   "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
-    "@fails-components/app": "^1.0.0-rc.8",
-    "@fails-components/apphandler": "github:fails-components/apphandler",
-    "@fails-components/housekeeping": "github:fails-components/housekeeping",
-    "@fails-components/lectureapp": "^1.0.0-rc.5",
-    "@fails-components/ltihandler": "github:fails-components/ltihandler",
-    "@fails-components/notepadhandler": "github:fails-components/notepadhandler",
-    "@fails-components/noteshandler": "github:fails-components/noteshandler",
-    "@fails-components/security": "github:fails-components/security"
+    "@fails-components/app": "^1.0.0",
+    "@fails-components/apphandler": "github:fails-components/apphandler#semver:^1.0",
+    "@fails-components/housekeeping": "github:fails-components/housekeeping#semver:^1.0",
+    "@fails-components/lectureapp": "^1.0.0",
+    "@fails-components/ltihandler": "github:fails-components/ltihandler#semver:^1.0",
+    "@fails-components/notepadhandler": "github:fails-components/notepadhandler#semver:^1.0",
+    "@fails-components/noteshandler": "github:fails-components/noteshandler#semver:^1.0",
+    "@fails-components/security": "github:fails-components/security#semver:^1.0"
   }
 }
