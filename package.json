@@ -13,7 +13,7 @@
   "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
-    "@fails-components/app": "^1.0.0",
+    "@fails-components/app": "^1.0.2",
     "@fails-components/apphandler": "github:fails-components/apphandler#semver:^1.0",
     "@fails-components/housekeeping": "github:fails-components/housekeeping#semver:^1.0",
     "@fails-components/lectureapp": "^1.0.0",
