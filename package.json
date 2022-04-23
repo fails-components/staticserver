@@ -1,6 +1,6 @@
 {
   "name": "@fails-components/staticserver",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "description": "fails static webpages served through nginx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -13,7 +13,7 @@
   "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
-    "@fails-components/app": "^1.0.0",
+    "@fails-components/app": "^1.0.3",
     "@fails-components/apphandler": "github:fails-components/apphandler#next",
     "@fails-components/housekeeping": "github:fails-components/housekeeping#next",
     "@fails-components/lectureapp": "^1.0.0",
