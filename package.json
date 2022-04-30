@@ -14,12 +14,12 @@
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
     "@fails-components/app": "^1.0.3",
-    "@fails-components/apphandler": "github:fails-components/apphandler#next",
-    "@fails-components/housekeeping": "github:fails-components/housekeeping#next",
-    "@fails-components/lectureapp": "^1.0.3",
-    "@fails-components/ltihandler": "github:fails-components/ltihandler#next",
-    "@fails-components/notepadhandler": "github:fails-components/notepadhandler#next",
-    "@fails-components/noteshandler": "github:fails-components/noteshandler#next",
-    "@fails-components/security": "github:fails-components/security#next"
+    "@fails-components/apphandler": "github:fails-components/apphandler#master",
+    "@fails-components/housekeeping": "github:fails-components/housekeeping#master",
+    "@fails-components/lectureapp": "^1.0.4",
+    "@fails-components/ltihandler": "github:fails-components/ltihandler#master",
+    "@fails-components/notepadhandler": "github:fails-components/notepadhandler#master",
+    "@fails-components/noteshandler": "github:fails-components/noteshandler#master",
+    "@fails-components/security": "github:fails-components/security#master"
   }
 }
