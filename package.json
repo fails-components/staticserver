@@ -16,7 +16,7 @@
     "@fails-components/app": "^1.0.3",
     "@fails-components/apphandler": "github:fails-components/apphandler#master",
     "@fails-components/housekeeping": "github:fails-components/housekeeping#master",
-    "@fails-components/lectureapp": "^1.0.5",
+    "@fails-components/lectureapp": "^1.0.6",
     "@fails-components/ltihandler": "github:fails-components/ltihandler#master",
     "@fails-components/notepadhandler": "github:fails-components/notepadhandler#master",
     "@fails-components/noteshandler": "github:fails-components/noteshandler#master",
