@@ -7,7 +7,7 @@ WORKDIR /usr/src/staticserver
 COPY package*.json ./
 COPY .npmrc ./
 
-RUN npx browserslist@latest --update-db
+RUN --mount=type=secret,id=GH_TOKEN export GH_TOKEN=`cat /run/secrets/GH_TOKEN`; npx browserslist@latest --update-db
 RUN --mount=type=secret,id=GH_TOKEN export GH_TOKEN=`cat /run/secrets/GH_TOKEN`; npm ci --only=production 
 #build the app
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/app
