@@ -3,6 +3,14 @@ server {
  server_name frontend;
  port_in_redirect off;
 
+location = / {
+    return 302 /static/lecture/;
+}
+
+location /config {
+  root /usr/share/nginx/html;
+}
+
  location /static/app {
    root /usr/share/nginx/html;
    index index.html

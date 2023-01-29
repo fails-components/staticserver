@@ -21,16 +21,20 @@ WORKDIR /usr/src/staticserver
 RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-attribution
 
 FROM nginx:stable as staticserver-noassets
-COPY ./nginx.conf.noassets /etc/nginx/templates/default.conf.template
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/app/build/ /usr/share/nginx/html/static/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureapp/build/ /usr/share/nginx/html/static/lecture
 COPY --from=build-stage /usr/src/staticserver/oss-attribution/ /usr/share/nginx/html/static/oss/
+RUN mkdir -p /usr/share/nginx/html/config
+COPY ./nginx.conf.noassets /etc/nginx/templates/default.conf.template
+COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 
 FROM nginx:stable
-COPY ./nginx.conf /etc/nginx/templates/default.conf.template
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/app/build/ /usr/share/nginx/html/static/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureapp/build/ /usr/share/nginx/html/static/lecture
 COPY --from=build-stage /usr/src/staticserver/oss-attribution/ /usr/share/nginx/html/static/oss/
+RUN mkdir -p /usr/share/nginx/html/config
+COPY ./nginx.conf /etc/nginx/templates/default.conf.template
+COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 
 VOLUME ["/usr/share/nginx/htmlsecuredfiles"]
 
