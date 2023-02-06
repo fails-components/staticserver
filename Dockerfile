@@ -16,13 +16,14 @@ RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
 # build the experimental app
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/appexperimental
 RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/appexperimental/node_modules -p && mv /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/public/iconexp.svg /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/public/icon.svg && ln -s /usr/src/staticserver/node_modules/qr-scanner /usr/src/staticserver/node_modules/@fails-components/appexperimental/node_modules/qr-scanner
-RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
+RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');export PUBLIC_URL=/static/experimental/app/;npm run build
 #build the lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
 #build the experimental lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
+RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');export PUBLIC_URL=/static/experimental/lecture/;npm run build
 
 WORKDIR /usr/src/staticserver
 RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-attribution
