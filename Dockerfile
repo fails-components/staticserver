@@ -1,4 +1,4 @@
-FROM node:16-bullseye as build-stage
+FROM node:18-bullseye as build-stage
 
 ARG ENV
 
