@@ -1,4 +1,4 @@
-FROM node:16-bullseye as build-stage
+FROM node:18-bullseye as build-stage
 
 ARG ENV
 
@@ -7,23 +7,46 @@ WORKDIR /usr/src/staticserver
 COPY package*.json ./
 COPY .npmrc ./
 
+RUN --mount=type=secret,id=GH_TOKEN export GH_TOKEN=`cat /run/secrets/GH_TOKEN`; npx browserslist@latest --update-db
 RUN --mount=type=secret,id=GH_TOKEN export GH_TOKEN=`cat /run/secrets/GH_TOKEN`; npm ci --only=production 
 #build the app
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/app
-RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/app/node_modules -p && ln -s /usr/src/staticserver/node_modules/qr-scanner /usr/src/staticserver/node_modules/@fails-components/app/node_modules/qr-scanner
+RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/app/node_modules -p && mv /usr/src/staticserver/node_modules/@fails-components/appexperimental/public/iconexp.svg /usr/src/staticserver/node_modules/@fails-components/appexperimental/public/icon.svg && ln -s /usr/src/staticserver/node_modules/qr-scanner /usr/src/staticserver/node_modules/@fails-components/app/node_modules/qr-scanner
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
+# build the experimental app
+WORKDIR /usr/src/staticserver/node_modules/@fails-components/appexperimental
+RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/appexperimental/node_modules -p && mv /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/public/iconexp.svg /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/public/icon.svg && ln -s /usr/src/staticserver/node_modules/qr-scanner /usr/src/staticserver/node_modules/@fails-components/appexperimental/node_modules/qr-scanner
+RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');export PUBLIC_URL=/static/experimental/app/;npm run build
 #build the lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
+#build the experimental lectureapp
+WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental
+RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');npm run build
+RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');export PUBLIC_URL=/static/experimental/lecture/;npm run build
 
 WORKDIR /usr/src/staticserver
 RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-attribution
 
-FROM nginx:1.21
-COPY ./nginx.conf /etc/nginx/templates/default.conf.template
+FROM nginx:stable as staticserver-noassets
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/app/build/ /usr/share/nginx/html/static/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureapp/build/ /usr/share/nginx/html/static/lecture
+COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/appexperimental/build/ /usr/share/nginx/html/static/experimental/app
+COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/build/ /usr/share/nginx/html/static/experimental/lecture
 COPY --from=build-stage /usr/src/staticserver/oss-attribution/ /usr/share/nginx/html/static/oss/
+RUN mkdir -p /usr/share/nginx/html/config
+COPY ./nginx.conf.noassets /etc/nginx/templates/default.conf.template
+COPY ./40-copy-fails-env.sh /docker-entrypoint.d
+
+FROM nginx:stable
+COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/app/build/ /usr/share/nginx/html/static/app
+COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureapp/build/ /usr/share/nginx/html/static/lecture
+COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/appexperimental/build/ /usr/share/nginx/html/static/experimental/app
+COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/build/ /usr/share/nginx/html/static/experimental/lecture
+COPY --from=build-stage /usr/src/staticserver/oss-attribution/ /usr/share/nginx/html/static/oss/
+RUN mkdir -p /usr/share/nginx/html/config
+COPY ./nginx.conf /etc/nginx/templates/default.conf.template
+COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 
 VOLUME ["/usr/share/nginx/htmlsecuredfiles"]
 

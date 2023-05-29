@@ -7,15 +7,6 @@ location = / {
     return 302 /static/lecture/;
 }
 
-location /files {
-    alias /usr/share/nginx/htmlsecuredfiles;
-    secure_link $arg_md5,$arg_expires;
-    secure_link_md5 "$secure_link_expires$uri ${FAILS_STATIC_SECRET}";
-
-    if ($secure_link = "") { return 403; }
-    if ($secure_link = "0") { return 410; }
-}
-
 location /config {
   root /usr/share/nginx/html;
 }
@@ -25,14 +16,14 @@ location /config {
    index index.html
    try_files $uri /index.html;
  }
- 
+
  location /static/lecture {
    root /usr/share/nginx/html;
    index index.html
    try_files $uri /index.html;
  }
 
- location /static/experimental/app {
+  location /static/experimental/app {
    root /usr/share/nginx/html;
    index index.html
    try_files $uri /index.html;
