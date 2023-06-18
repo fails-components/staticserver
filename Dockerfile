@@ -15,12 +15,11 @@ RUN make build-opus
 FROM node:18-bullseye as libavcodecstage
 
 WORKDIR /usr/src
-#RUN git clone https://github.com/ennuicastr/libavjs-webcodecs-polyfill.git
+RUN git clone https://github.com/ennuicastr/libavjs-webcodecs-polyfill.git
 # clone a specific branch until merged
-RUN git clone https://github.com/fails-components/libavjs-webcodecs-polyfill.git
 
 WORKDIR /usr/src/libavjs-webcodecs-polyfill
-RUN git checkout fixmonostereo
+RUN git checkout 9363757c96b857fd7ee22d15b449f6fac35c8fbf
 
 RUN make
 # end temporary code
@@ -51,7 +50,10 @@ RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/appexperimenta
     && ln -s /usr/src/staticserver/node_modules/qr-scanner /usr/src/staticserver/node_modules/@fails-components/appexperimental/node_modules/qr-scanner \
     && ln -s /usr/src/staticserver/node_modules/libav.js /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/libav.js \
     && ln -s /usr/src/staticserver/node_modules/pdfjs-dist /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/pdfjs-dist \ 
-    && ln -s /usr/src/staticserver/node_modules/libavjs-webcodecs-polyfill /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/libavjs-webcodecs-polyfill
+    && ln -s /usr/src/staticserver/node_modules/libavjs-webcodecs-polyfill /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/libavjs-webcodecs-polyfill \
+    && ln -s /usr/src/staticserver/node_modules/libav.js /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/libav.js \
+    && ln -s /usr/src/staticserver/node_modules/pdfjs-dist /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/pdfjs-dist \ 
+    && ln -s /usr/src/staticserver/node_modules/libavjs-webcodecs-polyfill /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/libavjs-webcodecs-polyfill
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');export PUBLIC_URL=/static/experimental/app/;npm run build
 #build the lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
