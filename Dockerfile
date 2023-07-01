@@ -8,7 +8,7 @@ WORKDIR /usr/src
 RUN git clone https://github.com/Yahweasel/libav.js.git
 
 WORKDIR /usr/src/libav.js
-RUN  git checkout 95a23d712519adaecb76f653e55df0ecd4355d6b
+RUN  git checkout 2aab58662ca6b0ba24eac71dd33918925bd799a8
 
 RUN make build-opus
 
@@ -19,7 +19,7 @@ RUN git clone https://github.com/ennuicastr/libavjs-webcodecs-polyfill.git
 # clone a specific branch until merged
 
 WORKDIR /usr/src/libavjs-webcodecs-polyfill
-RUN git checkout 9363757c96b857fd7ee22d15b449f6fac35c8fbf
+RUN git checkout e148ad33037c8575e27b8f9500d119c4523d23c5
 
 RUN make
 # end temporary code

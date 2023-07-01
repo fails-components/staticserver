@@ -18,8 +18,8 @@
     "@fails-components/apphandler": "github:fails-components/apphandler#next",
     "@fails-components/authhandler": "github:fails-components/authhandler#next",
     "@fails-components/housekeeping": "github:fails-components/housekeeping#next",
-    "@fails-components/lectureapp": "v1.2.2",
-    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.3",
+    "@fails-components/lectureapp": "v1.2.3",
+    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.4",
     "@fails-components/ltihandler": "github:fails-components/ltihandler#next",
     "@fails-components/notepadhandler": "github:fails-components/notepadhandler#next",
     "@fails-components/noteshandler": "github:fails-components/noteshandler#next"
