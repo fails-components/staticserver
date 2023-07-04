@@ -68,8 +68,14 @@ RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-a
 FROM nginx:stable as staticserver-noassets
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/app/build/ /usr/share/nginx/html/static/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureapp/build/ /usr/share/nginx/html/static/lecture
+#workaround to remove old service worker
+RUN cp /usr/share/nginx/html/static/lecture/sw.js /usr/share/nginx/html/static/lecture/service-worker.js
+
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/appexperimental/build/ /usr/share/nginx/html/static/experimental/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/build/ /usr/share/nginx/html/static/experimental/lecture
+#workaround to remove old service worker
+RUN cp /usr/share/nginx/html/static/experimental/lecture/sw.js /usr/share/nginx/html/static/experimental/lecture/service-worker.js
+
 COPY --from=build-stage /usr/src/staticserver/oss-attribution/ /usr/share/nginx/html/static/oss/
 RUN mkdir -p /usr/share/nginx/html/config
 COPY ./nginx.conf.noassets /etc/nginx/templates/default.conf.template
@@ -78,8 +84,14 @@ COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 FROM nginx:stable
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/app/build/ /usr/share/nginx/html/static/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureapp/build/ /usr/share/nginx/html/static/lecture
+#workaround to remove old service worker
+RUN cp /usr/share/nginx/html/static/lecture/sw.js /usr/share/nginx/html/static/lecture/service-worker.js
+
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/appexperimental/build/ /usr/share/nginx/html/static/experimental/app
 COPY --from=build-stage /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/build/ /usr/share/nginx/html/static/experimental/lecture
+#workaround to remove old service worker
+RUN cp /usr/share/nginx/html/static/experimental/lecture/sw.js /usr/share/nginx/html/static/experimental/lecture/service-worker.js
+
 COPY --from=build-stage /usr/src/staticserver/oss-attribution/ /usr/share/nginx/html/static/oss/
 RUN mkdir -p /usr/share/nginx/html/config
 COPY ./nginx.conf /etc/nginx/templates/default.conf.template
