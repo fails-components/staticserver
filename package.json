@@ -14,12 +14,12 @@
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
     "@fails-components/app": "v1.2.0",
-    "@fails-components/appexperimental": "npm:@fails-components/app@^1.2.0",
+    "@fails-components/appexperimental": "npm:@fails-components/app@^1.2.1",
     "@fails-components/apphandler": "github:fails-components/apphandler#next",
     "@fails-components/authhandler": "github:fails-components/authhandler#next",
     "@fails-components/housekeeping": "github:fails-components/housekeeping#next",
-    "@fails-components/lectureapp": "v1.2.4",
-    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.5",
+    "@fails-components/lectureapp": "v1.2.5",
+    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.6",
     "@fails-components/ltihandler": "github:fails-components/ltihandler#next",
     "@fails-components/notepadhandler": "github:fails-components/notepadhandler#next",
     "@fails-components/noteshandler": "github:fails-components/noteshandler#next"
