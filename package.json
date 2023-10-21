@@ -13,15 +13,16 @@
   "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
-    "@fails-components/app": "v1.2.1",
-    "@fails-components/appexperimental": "npm:@fails-components/app@^1.2.2",
-    "@fails-components/apphandler": "github:fails-components/apphandler#next",
-    "@fails-components/authhandler": "github:fails-components/authhandler#next",
-    "@fails-components/housekeeping": "github:fails-components/housekeeping#next",
-    "@fails-components/lectureapp": "v1.2.6",
-    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.7",
-    "@fails-components/ltihandler": "github:fails-components/ltihandler#next",
-    "@fails-components/notepadhandler": "github:fails-components/notepadhandler#next",
-    "@fails-components/noteshandler": "github:fails-components/noteshandler#next"
+    "@fails-components/app": "v1.2.2",
+    "@fails-components/appexperimental": "npm:@fails-components/app@^1.2.3",
+    "@fails-components/apphandler": "github:fails-components/apphandler#master",
+    "@fails-components/authhandler": "github:fails-components/authhandler#master",
+    "@fails-components/avsdispatcher": "github:fails-components/avsdispatcher#master",
+    "@fails-components/housekeeping": "github:fails-components/housekeeping#master",
+    "@fails-components/lectureapp": "v1.2.7",
+    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.8",
+    "@fails-components/ltihandler": "github:fails-components/ltihandler#master",
+    "@fails-components/notepadhandler": "github:fails-components/notepadhandler#master",
+    "@fails-components/noteshandler": "github:fails-components/noteshandler#master"
   }
 }
