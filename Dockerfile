@@ -12,7 +12,7 @@
 
 #RUN make build-opus
 
-#FROM node:18-bullseye as libavcodecstage
+#FROM node:18-bookworm-slim as libavcodecstage
 
 #WORKDIR /usr/src
 #RUN git clone https://github.com/ennuicastr/libavjs-webcodecs-polyfill.git
@@ -24,7 +24,7 @@
 #RUN make
 # end temporary code
 
-FROM node:18-bullseye as build-stage
+FROM node:18-bookworm-slim as build-stage
 
 ARG ENV
 
