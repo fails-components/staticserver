@@ -20,7 +20,7 @@
     "@fails-components/avsdispatcher": "github:fails-components/avsdispatcher#master",
     "@fails-components/housekeeping": "github:fails-components/housekeeping#master",
     "@fails-components/lectureapp": "v1.2.18",
-    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.24",
+    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.25",
     "@fails-components/ltihandler": "github:fails-components/ltihandler#master",
     "@fails-components/notepadhandler": "github:fails-components/notepadhandler#master",
     "@fails-components/noteshandler": "github:fails-components/noteshandler#master"
