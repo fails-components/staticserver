@@ -51,13 +51,13 @@ RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/appexperimenta
     && ln -s /usr/src/staticserver/node_modules/libav.js /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/libav.js \
     && ln -s /usr/src/staticserver/node_modules/pdfjs-dist /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/pdfjs-dist \ 
     && ln -s /usr/src/staticserver/node_modules/libavjs-webcodecs-polyfill /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/libavjs-webcodecs-polyfill \
-    && mkdir -p /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/@media-pipe \
-    && ln -s /usr/src/staticserver/node_modules/@media-pipe/tasks-vision /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/@media-pipe/tasks-vision \
+    && mkdir -p /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/@mediapipe \
+    && ln -s /usr/src/staticserver/node_modules/@mediapipe/tasks-vision /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental/node_modules/@mediapipe/tasks-vision \
     && ln -s /usr/src/staticserver/node_modules/libav.js /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/libav.js \
     && ln -s /usr/src/staticserver/node_modules/pdfjs-dist /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/pdfjs-dist \ 
     && ln -s /usr/src/staticserver/node_modules/libavjs-webcodecs-polyfill /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/libavjs-webcodecs-polyfill \
-    && mkdir -p /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/@media-pipe \
-    && ln -s /usr/src/staticserver/node_modules/@media-pipe/tasks-vision /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/@media-pipe/tasks-vision
+    && mkdir -p /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/@mediapipe \
+    && ln -s /usr/src/staticserver/node_modules/@mediapipe/tasks-vision /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/@mediapipe/tasks-vision
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');export PUBLIC_URL=/static/experimental/app/;npm run build
 #build the lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
