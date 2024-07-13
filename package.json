@@ -1,6 +1,6 @@
 {
   "name": "@fails-components/staticserver",
-  "version": "1.2.41",
+  "version": "1.2.42",
   "description": "fails static webpages served through nginx",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
