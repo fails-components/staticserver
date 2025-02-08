@@ -94,7 +94,7 @@ RUN ~/miniconda3/bin/conda create -y -n failscomponents --override-channels --st
     git copier=7 jinja2-time \
     jupyterlite-core=0.5.0 \
     jupyterlite-pyodide-kernel=0.5.1 \
-    jupyterlite-xeus=3.1.1
+    jupyterlite-xeus=3.1.4
 
 RUN ~/miniconda3/bin/conda run -n failscomponents pip install \
     fails-components-jupyter-applet-view==0.0.1a10 \
