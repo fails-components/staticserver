@@ -91,7 +91,8 @@ server {
     proxy_set_header X-Forwarded-Proto "";
   }
 
-  location /jupyter {
+location /jupyter {
+  location ~ ^/jupyter/(?!proxy/).*$ {
     root /usr/share/nginx/html;
     index index.html
     try_files $uri /index.html;
@@ -110,8 +111,9 @@ server {
     add_header Access-Control-Allow-Credentials 'true';
 
     location ~* \.(wasm|tar\.gz)$ {
-        add_header Cache-Control "public, max-age=2419200, must-revalidate"; 
-        expires 4w;
+      add_header Cache-Control "public, max-age=2419200, must-revalidate"; 
+      expires 4w;
     }
   }
+}
 }
