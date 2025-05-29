@@ -19,8 +19,8 @@
     "@fails-components/authhandler": "github:fails-components/authhandler#master",
     "@fails-components/avsdispatcher": "github:fails-components/avsdispatcher#master",
     "@fails-components/housekeeping": "github:fails-components/housekeeping#master",
-    "@fails-components/lectureapp": "v1.2.45",
-    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.46",
+    "@fails-components/lectureapp": "v1.2.47",
+    "@fails-components/lectureappexperimental": "npm:@fails-components/lectureapp@1.2.47",
     "@fails-components/ltihandler": "github:fails-components/ltihandler#master",
     "@fails-components/notepadhandler": "github:fails-components/notepadhandler#master",
     "@fails-components/noteshandler": "github:fails-components/noteshandler#master"
