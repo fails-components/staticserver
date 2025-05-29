@@ -13,8 +13,8 @@
   "license": "AGPL-3.0-or-later",
   "homepage": "https://github.com/fails-components/staticserver#readme",
   "dependencies": {
-    "@fails-components/app": "v1.2.21",
-    "@fails-components/appexperimental": "npm:@fails-components/app@^1.2.21",
+    "@fails-components/app": "v1.2.22",
+    "@fails-components/appexperimental": "npm:@fails-components/app@^1.2.22",
     "@fails-components/apphandler": "github:fails-components/apphandler#master",
     "@fails-components/authhandler": "github:fails-components/authhandler#master",
     "@fails-components/avsdispatcher": "github:fails-components/avsdispatcher#master",
