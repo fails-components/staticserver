@@ -24,7 +24,7 @@
 #RUN make
 # end temporary code
 
-FROM node:20-bookworm-slim AS build-stage
+FROM node:22-bookworm-slim AS build-stage
 
 ARG ENV
 
@@ -40,7 +40,7 @@ RUN --mount=type=secret,id=GH_TOKEN export GH_TOKEN=`cat /run/secrets/GH_TOKEN`;
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/app
 RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/app/node_modules -p && mv /usr/src/staticserver/node_modules/@fails-components/appexperimental/public/iconexp.svg /usr/src/staticserver/node_modules/@fails-components/appexperimental/public/icon.svg && ln -s /usr/src/staticserver/node_modules/qr-scanner /usr/src/staticserver/node_modules/@fails-components/app/node_modules/qr-scanner
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g'); \
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
     npm run build
 # tempcode for libav
 #COPY --from=libavstage /usr/src/libav.js/dist/libav-*opus* /usr/src/staticserver/node_modules/libav.js/
@@ -62,24 +62,24 @@ RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/appexperimenta
     && ln -s /usr/src/staticserver/node_modules/@mediapipe/tasks-vision /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/@mediapipe/tasks-vision
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');\
     export PUBLIC_URL=/static/experimental/app/;\
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
     npm run build
 #build the lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g'); \
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
     npm run build
 #build the experimental lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g'); \
     export PUBLIC_URL=/static/experimental/lecture/;\
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
     npm run build
 
 WORKDIR /usr/src/staticserver
 RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-attribution
 
-FROM node:20-bookworm-slim AS jupyter-build
+FROM node:22-bookworm-slim AS jupyter-build
 
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y git pipx wget
 
@@ -89,18 +89,18 @@ RUN mkdir -p ~/miniconda3 && \
     rm -rf ~/miniconda3/miniconda.sh && \
      ~/miniconda3/bin/conda init bash
 RUN ~/miniconda3/bin/conda create -y -n failscomponents --override-channels --strict-channel-priority -c conda-forge -c nodefaults \
-    jupyterlab=4 \
-    nodejs=18 \
+    jupyterlab=4.4 \
+    nodejs=22 \
     git copier=7 jinja2-time \
-    jupyterlite-core=0.5.1 \
-    jupyterlite-pyodide-kernel=0.5.2 \
-    jupyterlite-xeus=3.1.6
+    jupyterlite-core=0.6.2 \
+    jupyterlite-pyodide-kernel=0.6.1 \
+    jupyterlite-xeus=4.0.3
 
 RUN ~/miniconda3/bin/conda run -n failscomponents pip install \
-    fails-components-jupyter-applet-view==0.0.1a15 \
-    fails-components-jupyter-filesystem-extension==0.0.1a15 \
-    fails-components-jupyter-interceptor==0.0.1a15 \
-    fails-components-jupyter-launcher==0.0.1a15
+    fails-components-jupyter-applet-view==0.0.2 \
+    fails-components-jupyter-filesystem-extension==0.0.2 \
+    fails-components-jupyter-interceptor==0.0.2 \
+    fails-components-jupyter-launcher==0.0.2
 
 WORKDIR /usr/src/jupyterlite/
 
@@ -125,7 +125,7 @@ RUN mkdir -p /usr/share/nginx/html/config
 COPY ./nginx.conf.noassets /etc/nginx/templates/default.conf.template
 COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 
-RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
+RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
 COPY --from=jupyter-build /usr/src/jupyterlite/jupyterLiteFailsOut/ /usr/share/nginx/html/jupyter/
 
 FROM nginx:stable
@@ -144,7 +144,7 @@ RUN mkdir -p /usr/share/nginx/html/config
 COPY ./nginx.conf /etc/nginx/templates/default.conf.template
 COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 
-RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
+RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
 COPY --from=jupyter-build /usr/src/jupyterlite/jupyterLiteFailsOut/ /usr/share/nginx/html/jupyter/
 
 VOLUME ["/usr/share/nginx/htmlsecuredfiles"]

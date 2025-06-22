@@ -85,7 +85,8 @@ server {
     add_header Access-Control-Allow-Headers 'Content-Type, Authorization';
     add_header Access-Control-Allow-Credentials 'true';
 
-    proxy_set_header Host $proxy_host;
+# non uncomment as it was specified a second time, I leave it in case it causes troubles later
+#   proxy_set_header Host $proxy_host;
     proxy_set_header X-Real-IP "";
     proxy_set_header X-Forwarded-For 127.0.0.1;
     proxy_set_header X-Forwarded-Proto "";
