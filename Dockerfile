@@ -97,10 +97,10 @@ RUN ~/miniconda3/bin/conda create -y -n failscomponents --override-channels --st
     jupyterlite-xeus=4.0.3
 
 RUN ~/miniconda3/bin/conda run -n failscomponents pip install \
-    fails-components-jupyter-applet-view==0.0.3 \
-    fails-components-jupyter-filesystem-extension==0.0.3 \
-    fails-components-jupyter-interceptor==0.0.3 \
-    fails-components-jupyter-launcher==0.0.3
+    fails-components-jupyter-applet-view==0.0.4 \
+    fails-components-jupyter-filesystem-extension==0.0.4 \
+    fails-components-jupyter-interceptor==0.0.4 \
+    fails-components-jupyter-launcher==0.0.4
 
 WORKDIR /usr/src/jupyterlite/
 
