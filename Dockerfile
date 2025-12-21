@@ -24,7 +24,7 @@
 #RUN make
 # end temporary code
 
-FROM node:22-bookworm-slim AS build-stage
+FROM node:24-trixie-slim AS build-stage
 
 ARG ENV
 
@@ -79,7 +79,7 @@ RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g'); \
 WORKDIR /usr/src/staticserver
 RUN npm i -g oss-attribution-generator && mkdir -p oss-attribution && generate-attribution
 
-FROM node:22-bookworm-slim AS jupyter-build
+FROM node:24-trixie-slim AS jupyter-build
 
 RUN apt-get update -y && apt-get upgrade -y && apt-get install -y git pipx wget
 
@@ -89,18 +89,18 @@ RUN mkdir -p ~/miniconda3 && \
     rm -rf ~/miniconda3/miniconda.sh && \
      ~/miniconda3/bin/conda init bash
 RUN ~/miniconda3/bin/conda create -y -n failscomponents --override-channels --strict-channel-priority -c conda-forge -c nodefaults \
-    jupyterlab=4.4 \
-    nodejs=22 \
+    jupyterlab=4.5.1 \
+    nodejs=24 \
     git copier=7 jinja2-time \
-    jupyterlite-core=0.6.2 \
-    jupyterlite-pyodide-kernel=0.6.1 \
-    jupyterlite-xeus=4.0.3
+    jupyterlite-core=0.7.1 \
+    jupyterlite-pyodide-kernel=0.7.0 \
+    jupyterlite-xeus=4.3.7
 
 RUN ~/miniconda3/bin/conda run -n failscomponents pip install \
-    fails-components-jupyter-applet-view==0.0.4 \
-    fails-components-jupyter-filesystem-extension==0.0.4 \
-    fails-components-jupyter-interceptor==0.0.4 \
-    fails-components-jupyter-launcher==0.0.4
+    fails-components-jupyter-applet-view==0.0.5 \
+    fails-components-jupyter-filesystem-extension==0.0.5 \
+    fails-components-jupyter-interceptor==0.0.5 \
+    fails-components-jupyter-launcher==0.0.5
 
 WORKDIR /usr/src/jupyterlite/
 
