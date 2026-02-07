@@ -40,7 +40,7 @@ RUN --mount=type=secret,id=GH_TOKEN export GH_TOKEN=`cat /run/secrets/GH_TOKEN`;
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/app
 RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/app/node_modules -p && mv /usr/src/staticserver/node_modules/@fails-components/appexperimental/public/iconexp.svg /usr/src/staticserver/node_modules/@fails-components/appexperimental/public/icon.svg && ln -s /usr/src/staticserver/node_modules/qr-scanner /usr/src/staticserver/node_modules/@fails-components/app/node_modules/qr-scanner
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g'); \
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev prefix.dev";\
     npm run build
 # tempcode for libav
 #COPY --from=libavstage /usr/src/libav.js/dist/libav-*opus* /usr/src/staticserver/node_modules/libav.js/
@@ -62,18 +62,18 @@ RUN mkdir -p /usr/src/staticserver/node_modules/@fails-components/appexperimenta
     && ln -s /usr/src/staticserver/node_modules/@mediapipe/tasks-vision /usr/src/staticserver/node_modules/@fails-components/lectureapp/node_modules/@mediapipe/tasks-vision
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g');\
     export PUBLIC_URL=/static/experimental/app/;\
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev prefix.dev";\
     npm run build
 #build the lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureapp
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g'); \
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev prefix.dev";\
     npm run build
 #build the experimental lectureapp
 WORKDIR /usr/src/staticserver/node_modules/@fails-components/lectureappexperimental
 RUN export REACT_APP_VERSION=$(npm pkg get version | sed 's/"//g'); \
     export PUBLIC_URL=/static/experimental/lecture/;\
-    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev";\
+    export REACT_APP_JUPYTER_PROXY_DOMAINS="pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev prefix.dev";\
     npm run build
 
 WORKDIR /usr/src/staticserver
@@ -125,7 +125,7 @@ RUN mkdir -p /usr/share/nginx/html/config
 COPY ./nginx.conf.noassets /etc/nginx/templates/default.conf.template
 COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 
-RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
+RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev prefix.dev" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
 COPY --from=jupyter-build /usr/src/jupyterlite/jupyterLiteFailsOut/ /usr/share/nginx/html/jupyter/
 
 FROM nginx:stable
@@ -144,7 +144,7 @@ RUN mkdir -p /usr/share/nginx/html/config
 COPY ./nginx.conf /etc/nginx/templates/default.conf.template
 COPY ./40-copy-fails-env.sh /docker-entrypoint.d
 
-RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
+RUN echo "pypi.org files.pythonhosted.org cdn.jsdelivr.net raw.githubusercontent.com repo.prefix.dev shards.prefix.dev prefix.dev" | tr ' ' '\n' | sed 's/$/ 1;/' > /etc/nginx/allowed_jupyter_proxy_hosts.conf
 COPY --from=jupyter-build /usr/src/jupyterlite/jupyterLiteFailsOut/ /usr/share/nginx/html/jupyter/
 
 VOLUME ["/usr/share/nginx/htmlsecuredfiles"]
